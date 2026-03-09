@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour {
         Vector2 moveInput = move.action.ReadValue<Vector2>();
         x = moveInput.x;
         y = moveInput.y;
-        // jumping = jump.action.IsPressed();
+        jumping = jump.action.IsPressed();
         crouching = crouch.action.IsPressed();
 
         //Crouching

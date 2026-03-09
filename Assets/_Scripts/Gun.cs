@@ -10,6 +10,7 @@ public class Gun : MonoBehaviour
     bool canFire = true;
     [SerializeField] InputActionReference fire;
     [SerializeField] Transform orientation;
+    [SerializeField] int maxCapacity, currentCapacity;
     Rigidbody rb;
     void OnEnable()
     {
@@ -33,6 +34,7 @@ public class Gun : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        currentCapacity = maxCapacity;
     }
 
     IEnumerator Cooldown(float duration)
