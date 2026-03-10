@@ -8,7 +8,7 @@ public class ObraDinn : MonoBehaviour
     public Material ditherMat;
     public Material thresholdMat;
     public Camera cam;
-    public RenderTexture inputTexture, outputTexture;
+    // public RenderTexture inputTexture, outputTexture;
     void Start() {
         cam = GetComponent<Camera>();
     }
@@ -41,9 +41,9 @@ public class ObraDinn : MonoBehaviour
         Graphics.Blit(src, large, ditherMat);
         Graphics.Blit(large, dst);
         // Graphics.CopyTexture(main, renderTexture);
-        // Graphics.Blit(large, main, thresholdMat);
-        //Graphics.Blit(src, normal, mat);
-        // Graphics.Blit(main, dst);
+        Graphics.Blit(large, main, thresholdMat);
+        // Graphics.Blit(src, normal, mat);
+        Graphics.Blit(main, dst);
         RenderTexture.ReleaseTemporary(large);
         RenderTexture.ReleaseTemporary(main);
     }
