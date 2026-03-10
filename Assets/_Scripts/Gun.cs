@@ -14,6 +14,7 @@ public class Gun : MonoBehaviour
     [SerializeField] Transform orientation;
     [SerializeField] int maxCapacity, currentCapacity;
     [SerializeField] TMP_Text debugText;
+    public CameraShake cameraShake;
     Rigidbody rb;
     void OnEnable()
     {
@@ -29,7 +30,12 @@ public class Gun : MonoBehaviour
     
     void Reload(InputAction.CallbackContext context)
     {
+        Reload();
+    }
+    void Reload()
+    {
         if(!isReloading) StartCoroutine(ReloadRoutine());
+        
     }
     void UpdateCounter()
     {
@@ -55,9 +61,12 @@ public class Gun : MonoBehaviour
         {
             rb.AddForce(-Camera.main.transform.forward * shootPower, ForceMode.Impulse);
             currentCapacity--;
+            cameraShake.StartShake();
             UpdateCounter();
             StartCoroutine(Cooldown(cooldownDuration));
+            return;
         }
+        else if(currentCapacity <= 0) Reload();
     }
     void Start()
     {
