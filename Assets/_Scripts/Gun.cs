@@ -8,11 +8,12 @@ public class Gun : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] float cooldownDuration, shootPower, reloadTime;
-    bool canFire = true, isReloading = false;
+    [SerializeField] GameObject bulletPrefab;
     [SerializeField] InputActionReference fire, reload;
-    [SerializeField] Transform orientation;
+    [SerializeField] Transform head;
     [SerializeField] int maxCapacity, currentCapacity;
     [SerializeField] TMP_Text debugText;
+    bool canFire = true, isReloading = false;
     public CameraShake cameraShake;
     Rigidbody rb;
     void OnEnable()
@@ -58,9 +59,10 @@ public class Gun : MonoBehaviour
     {
         if(canFire && (currentCapacity > 0 && !isReloading) )
         {
-            rb.AddForce(-Camera.main.transform.forward * shootPower, ForceMode.Impulse);
+            // rb.AddForce(-Camera.main.transform.forward * shootPower, ForceMode.Impulse);
             currentCapacity--;
-            cameraShake.StartShake();
+            // cameraShake.StartShake();
+            Instantiate(bulletPrefab, head.transform.position + head.transform.forward, Quaternion.LookRotation(head.transform.forward));
             UpdateCounter();
             StartCoroutine(Cooldown(cooldownDuration));
             return;
@@ -89,6 +91,6 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
-        Debug.DrawRay(Camera.main.transform.position, orientation.transform.forward * 5f, Color.red);
+        // Debug.DrawRay(Camera.main.transform.position, head.transform.forward * 5f, Color.red);
     }
 }

@@ -81,6 +81,7 @@ public class PlayerMovement : MonoBehaviour {
     /// </summary>
     private void MyInput() {
         Vector2 moveInput = move.action.ReadValue<Vector2>();
+        Debug.DrawRay(transform.position, moveInput * 5, Color.blue);
         x = moveInput.x;
         y = moveInput.y;
         jumping = jump.action.IsPressed();
