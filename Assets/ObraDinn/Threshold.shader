@@ -2,41 +2,57 @@ Shader "Effects/Threshold"
 {
     Properties
     {
-        // _BlitTexture is bound automatically by Blitter — do not rename
-        _BG ("Background", Color) = (0,0,0,1)
+        _MainTex ("Texture", 2D) = "white" {}
+        _BG ("Background", Color) = (0,0,0,0)
         _FG ("Foreground", Color) = (1,1,1,1)
     }
-
     SubShader
     {
-        Tags { "RenderType"="Opaque" "RenderPipeline"="UniversalPipeline" }
+        // No culling or depth
         Cull Off ZWrite Off ZTest Always
 
         Pass
         {
-            Name "Threshold"
-
-            HLSLPROGRAM
-            #pragma vertex Vert
+            CGPROGRAM
+            #pragma vertex vert
             #pragma fragment frag
 
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            #include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
+            #include "UnityCG.cginc"
 
-            CBUFFER_START(UnityPerMaterial)
-                half4 _BG;
-                half4 _FG;
-            CBUFFER_END
-
-            half4 frag(Varyings input) : SV_Target
+            struct appdata
             {
-                UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
+                float4 vertex : POSITION;
+                float2 uv : TEXCOORD0;
+            };
 
-                half4 col = SAMPLE_TEXTURE2D_X(_BlitTexture, sampler_LinearClamp, input.texcoord);
-                col.rgb = lerp(_BG.rgb, _FG.rgb, round(col.r));
+            struct v2f
+            {
+                float2 uv : TEXCOORD0;
+                float4 vertex : SV_POSITION;
+            };
+
+            v2f vert (appdata v)
+            {
+                v2f o;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = v.uv;
+                return o;
+            }
+
+            sampler2D _MainTex;
+
+            float4 _BG;
+            float4 _FG;
+
+            fixed4 frag (v2f i) : SV_Target
+            {
+                fixed4 col = tex2D(_MainTex, i.uv);
+                
+                col.rgb = lerp(_BG, _FG, round(col.r)).rgb;
+
                 return col;
             }
-            ENDHLSL
+            ENDCG
         }
     }
 }
