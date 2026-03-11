@@ -428,6 +428,9 @@ MonoBehaviour:
   maxCapacity: 6
   currentCapacity: 0
   debugText: {fileID: 1445126797}
+  whatIsground:
+    serializedVersion: 2
+    m_Bits: 64
   cameraShake: {fileID: 0}
 --- !u!1 &161812377
 GameObject:

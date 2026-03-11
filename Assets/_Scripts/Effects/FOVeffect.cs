@@ -12,7 +12,7 @@ public class FOVeffect : MonoBehaviour
     {
         float currentSpeed = playerRB.linearVelocity.magnitude;
         Camera.main.fieldOfView = speedToFOV(currentSpeed);
-        debugText.text = String.Format("current FOV: {0}", speedToFOV(currentSpeed));
+        if(debugText != null) debugText.text = String.Format("current FOV: {0}", speedToFOV(currentSpeed));
     }
 
     float speedToFOV(float speed)

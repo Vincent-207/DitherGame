@@ -13,6 +13,7 @@ public class Gun : MonoBehaviour
     [SerializeField] Transform head;
     [SerializeField] int maxCapacity, currentCapacity;
     [SerializeField] TMP_Text debugText;
+    public LayerMask whatIsground;
     bool canFire = true, isReloading = false;
     public CameraShake cameraShake;
     Rigidbody rb;
@@ -34,7 +35,7 @@ public class Gun : MonoBehaviour
     }
     void Reload()
     {
-        if(!isReloading) StartCoroutine(ReloadRoutine());
+        if(!isReloading && maxCapacity != currentCapacity) StartCoroutine(ReloadRoutine());
         
     }
     void UpdateCounter()
@@ -59,13 +60,21 @@ public class Gun : MonoBehaviour
     {
         if(canFire && (currentCapacity > 0 && !isReloading) )
         {
-            // rb.AddForce(-Camera.main.transform.forward * shootPower, ForceMode.Impulse);
-            currentCapacity--;
-            // cameraShake.StartShake();
-            Instantiate(bulletPrefab, head.transform.position + head.transform.forward, Quaternion.LookRotation(head.transform.forward));
-            UpdateCounter();
-            StartCoroutine(Cooldown(cooldownDuration));
+            RaycastHit raycastHit;
+            if(Physics.Raycast(head.position, head.forward, out raycastHit, 1000f, whatIsground))
+            {
+                // rb.AddForce(-Camera.main.transform.forward * shootPower, ForceMode.Impulse);
+                currentCapacity--;
+                // cameraShake.StartShake();
+                GameObject bullet = Instantiate(bulletPrefab, head.transform.position + head.transform.forward, Quaternion.LookRotation(head.transform.forward));
+                bullet.transform.position = raycastHit.point;
+            
+                UpdateCounter();
+                StartCoroutine(Cooldown(cooldownDuration));
+            }
+
             return;
+            
         }
         else if(currentCapacity <= 0) Reload();
     }
