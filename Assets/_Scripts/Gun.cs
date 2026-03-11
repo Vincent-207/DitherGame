@@ -16,6 +16,7 @@ public class Gun : MonoBehaviour
     public LayerMask whatIsground;
     bool canFire = true, isReloading = false;
     public CameraShake cameraShake;
+    public ParticleSystem muzzlePoof;
     Rigidbody rb;
     void OnEnable()
     {
@@ -68,7 +69,7 @@ public class Gun : MonoBehaviour
                 // cameraShake.StartShake();
                 GameObject bullet = Instantiate(bulletPrefab, head.transform.position + head.transform.forward, Quaternion.LookRotation(head.transform.forward));
                 bullet.transform.position = raycastHit.point;
-            
+                muzzlePoof.Play();
                 UpdateCounter();
                 StartCoroutine(Cooldown(cooldownDuration));
             }
