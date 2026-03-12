@@ -13,12 +13,13 @@ public class Gun : MonoBehaviour
     [SerializeField] Transform head;
     [SerializeField] int maxCapacity, currentCapacity;
     [SerializeField] TMP_Text debugText;
-    public LayerMask whatIsground;
+    [SerializeField] LayerMask whatIsground;
     bool canFire = true, isReloading = false;
-    public CameraShake cameraShake;
-    public ParticleSystem muzzlePoof;
+    [SerializeField] CameraShake cameraShake;
+    [SerializeField] ParticleSystem muzzlePoof;
     AudioSource audioSource;
     Rigidbody rb;
+    public ShootCursor shootCursor;
     void OnEnable()
     {
         fire.action.started += Shoot;
@@ -47,6 +48,7 @@ public class Gun : MonoBehaviour
     IEnumerator ReloadRoutine()
     {
         isReloading = true;
+        shootCursor.isReloading = isReloading;
         debugText.text = "Reloading...";
         float duration = reloadTime;
         while(duration > 0)
@@ -55,6 +57,7 @@ public class Gun : MonoBehaviour
             yield return null;
         }
         isReloading = false;
+        shootCursor.isReloading = isReloading;
         currentCapacity = maxCapacity;
         UpdateCounter();
     }
@@ -69,7 +72,7 @@ public class Gun : MonoBehaviour
                 currentCapacity--;
                 // cameraShake.StartShake();
                 GameObject bullet = Instantiate(bulletPrefab, head.transform.position + head.transform.forward, Quaternion.LookRotation(head.transform.forward));
-                bullet.transform.position = raycastHit.point;
+                // bullet.transform.position = raycastHit.point; //Hit scan
                 muzzlePoof.Play();
                 audioSource.Play();
                 UpdateCounter();
