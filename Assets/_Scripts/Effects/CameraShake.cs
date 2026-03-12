@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
+    [SerializeField] Vector3 origin;
     bool isShaking;
     public void StartShake()
     {
@@ -16,7 +17,6 @@ public class CameraShake : MonoBehaviour
     IEnumerator Shake(float duration, float magnitude)
     {
         isShaking = true;
-        Vector3 originalPos = transform.localPosition;
         float elapsed = 0;
         while(elapsed < duration)
         {
@@ -25,7 +25,7 @@ public class CameraShake : MonoBehaviour
             yield return null;
         }
 
-        transform.localPosition = originalPos;
+        transform.localPosition = origin;
         isShaking = false;
     }
 }

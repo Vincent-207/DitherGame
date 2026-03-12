@@ -15,8 +15,10 @@ public class ShootCursor : MonoBehaviour
     }
     void Update()
     {
-        bool isThereCollider = Physics.Raycast(head.position, head.forward, 1000f);
-        bool isThereShootAble = Physics.Raycast(head.position, head.forward, 1000f, whatIsShootable);
+        RaycastHit hit;
+        bool isThereCollider = Physics.Raycast(head.position, head.forward,out hit, 1000f);
+        // Debug.Log("hit: " + hit.collider.name);
+        bool isShootable = isThereCollider && (whatIsShootable & (1 << hit.collider.gameObject.layer)) != 0;
         image.sprite = null;
         image.color = new Color(1f, 1f, 1f, 0f);
         if(isReloading)
@@ -32,7 +34,7 @@ public class ShootCursor : MonoBehaviour
             image.sprite = notShootable;
 
         }
-        if(isThereShootAble) image.sprite = shootable;
+        if(isShootable) image.sprite = shootable;
 
 
 

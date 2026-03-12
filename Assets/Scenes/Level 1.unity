@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6283,6 +6283,7 @@ GameObject:
   - component: {fileID: 1391760618}
   - component: {fileID: 1391760617}
   - component: {fileID: 1391760624}
+  - component: {fileID: 1391760625}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6317,6 +6318,7 @@ MonoBehaviour:
     m_Bits: 64
   cameraShake: {fileID: 0}
   muzzlePoof: {fileID: 1345294131}
+  shootSound: {fileID: 8300000, guid: bf40a2b489308184eb11da7c7f913062, type: 3}
   shootCursor: {fileID: 301483629}
 --- !u!54 &1391760618
 Rigidbody:
@@ -6568,6 +6570,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1391760625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391760616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64dea20b89088c34b86a706640cf7ea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::collisionEffect
+  cameraShake: {fileID: 1652251671}
+  effectThreshold: 500
+  collisionSound: {fileID: 8300000, guid: 5d7557b8346c9da4496103fcf6d89085, type: 3}
 --- !u!1 &1392171253
 GameObject:
   m_ObjectHideFlags: 0
@@ -11855,6 +11872,7 @@ GameObject:
   - component: {fileID: 1652251668}
   - component: {fileID: 1652251667}
   - component: {fileID: 1652251670}
+  - component: {fileID: 1652251671}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -11967,6 +11985,19 @@ MonoBehaviour:
   maxFOV: 90
   playerRB: {fileID: 1391760618}
   debugText: {fileID: 0}
+--- !u!114 &1652251671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652251665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c527e0707f6b8aa45951b218081f55a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraShake
+  origin: {x: 0, y: 0, z: 0}
 --- !u!1 &1700775505
 GameObject:
   m_ObjectHideFlags: 0

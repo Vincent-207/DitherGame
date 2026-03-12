@@ -17,17 +17,18 @@ public class Gun : MonoBehaviour
     bool canFire = true, isReloading = false;
     [SerializeField] CameraShake cameraShake;
     [SerializeField] ParticleSystem muzzlePoof;
+    [SerializeField] AudioClip shootSound;
     AudioSource audioSource;
     Rigidbody rb;
     public ShootCursor shootCursor;
     void OnEnable()
     {
-        fire.action.started += Shoot;
+        fire.action.started += TryShoot;
         reload.action.started += Reload;
     }
     void OnDisable()
     {
-        fire.action.started -= Shoot;
+        fire.action.started -= TryShoot;
         reload.action.started -= Reload;
         
     }
@@ -61,29 +62,35 @@ public class Gun : MonoBehaviour
         currentCapacity = maxCapacity;
         UpdateCounter();
     }
-    void Shoot(InputAction.CallbackContext context)
+    void TryShoot(InputAction.CallbackContext context)
     {
-        if(canFire && (currentCapacity > 0 && !isReloading) )
+        if(canFire && currentCapacity > 0 && !isReloading)
         {
             RaycastHit raycastHit;
-            if(Physics.Raycast(head.position, head.forward, out raycastHit, 1000f, whatIsground))
+            if(Physics.Raycast(head.position, head.forward, out raycastHit, 1000f))
             {
-                // rb.AddForce(-Camera.main.transform.forward * shootPower, ForceMode.Impulse);
-                currentCapacity--;
-                // cameraShake.StartShake();
-                GameObject bullet = Instantiate(bulletPrefab, head.transform.position + head.transform.forward, Quaternion.LookRotation(head.transform.forward));
-                // bullet.transform.position = raycastHit.point; //Hit scan
-                muzzlePoof.Play();
-                audioSource.Play();
-                UpdateCounter();
-
-                StartCoroutine(Cooldown(cooldownDuration));
+                if((whatIsground & (1 << raycastHit.collider.gameObject.layer)) != 0)
+                {
+                    Shoot(raycastHit);
+                }
             }
-
             return;
             
         }
         else if(currentCapacity <= 0) Reload();
+    }
+    void Shoot(RaycastHit raycastHit)
+    {
+        // rb.AddForce(-Camera.main.transform.forward * shootPower, ForceMode.Impulse);
+        currentCapacity--;
+        // cameraShake.StartShake();
+        GameObject bullet = Instantiate(bulletPrefab, head.transform.position + head.transform.forward, Quaternion.LookRotation(head.transform.forward));
+        // bullet.transform.position = raycastHit.point; //Hit scan
+        muzzlePoof.Play();
+        audioSource.PlayOneShot(shootSound);
+        UpdateCounter();
+
+        StartCoroutine(Cooldown(cooldownDuration));
     }
     void Start()
     {
