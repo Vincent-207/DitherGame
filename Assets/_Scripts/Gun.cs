@@ -17,6 +17,7 @@ public class Gun : MonoBehaviour
     bool canFire = true, isReloading = false;
     public CameraShake cameraShake;
     public ParticleSystem muzzlePoof;
+    AudioSource audioSource;
     Rigidbody rb;
     void OnEnable()
     {
@@ -70,7 +71,9 @@ public class Gun : MonoBehaviour
                 GameObject bullet = Instantiate(bulletPrefab, head.transform.position + head.transform.forward, Quaternion.LookRotation(head.transform.forward));
                 bullet.transform.position = raycastHit.point;
                 muzzlePoof.Play();
+                audioSource.Play();
                 UpdateCounter();
+
                 StartCoroutine(Cooldown(cooldownDuration));
             }
 
@@ -83,6 +86,7 @@ public class Gun : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         currentCapacity = maxCapacity;
+        audioSource = GetComponent<AudioSource>();
         UpdateCounter();
     }
 

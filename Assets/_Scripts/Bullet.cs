@@ -1,13 +1,15 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.Rendering;
 
 public class Bullet : MonoBehaviour
 {
-    public float bulletSpeed, explosionForce, explosionRadius, upForce, explosionTime, explosionEffectEndScale;
+    public float bulletSpeed, explosionForce, explosionRadius, upForce, explosionTime, explosionEffectEndScale, pfxOffset;
     public Transform explosionEffect;
     public LayerMask whatIsGround;
+    public ParticleOneShot effect;
     Rigidbody rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,13 +26,13 @@ public class Bullet : MonoBehaviour
             Debug.Log("correct layer!"); 
             // Is in ground mask.
             
-            Explode();
+            Explode(collision);
             
             // Destroy(gameObject);
         }
     }
 
-    void Explode()
+    void Explode(Collision collision)
     {
         StartCoroutine(ExplosionEffect(explosionTime));
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
@@ -40,6 +42,9 @@ public class Bullet : MonoBehaviour
             if(colliderRB)
             {
                 colliderRB.AddExplosionForce(explosionForce, transform.position, explosionRadius, upForce);
+                Vector3 pfxPos = transform.position + collision.GetContact(0).normal.normalized * pfxOffset;
+                effect.transform.parent = transform.parent;
+                effect.PlayAtPosition(pfxPos);
             }
         }
 
