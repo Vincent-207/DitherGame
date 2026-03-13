@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour
 {
-    public string levelToLoadName;
+    [SerializeField] string levelToLoadName;
+    [SerializeField] LevelTimer levelTimer;
     void OnTriggerEnter(Collider collider)
     {
         if(collider.CompareTag("Player"))
@@ -14,6 +16,8 @@ public class Door : MonoBehaviour
     void LoadNextLevel()
     {
         Debug.Log("door has been entered correctly!");
+        SceneManager.LoadScene(levelToLoadName);
+        levelTimer.Save();
     }
     
 }

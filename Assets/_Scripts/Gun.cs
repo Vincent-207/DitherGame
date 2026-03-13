@@ -62,6 +62,12 @@ public class Gun : MonoBehaviour
         currentCapacity = maxCapacity;
         UpdateCounter();
     }
+
+    public static bool IsHitShootable(Collider collider)
+    {
+        if(collider.CompareTag("Shootable")) return true;
+        return false;
+    }
     void TryShoot(InputAction.CallbackContext context)
     {
         if(canFire && currentCapacity > 0 && !isReloading)
@@ -69,7 +75,7 @@ public class Gun : MonoBehaviour
             RaycastHit raycastHit;
             if(Physics.Raycast(head.position, head.forward, out raycastHit, 1000f))
             {
-                if((whatIsground & (1 << raycastHit.collider.gameObject.layer)) != 0)
+                if(IsHitShootable(raycastHit.collider))
                 {
                     Shoot(raycastHit);
                 }

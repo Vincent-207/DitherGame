@@ -20,15 +20,9 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("collison!");
         if((whatIsGround & (1 << collision.collider.gameObject.layer)) != 0)
         {
-            Debug.Log("correct layer!"); 
-            // Is in ground mask.
-            
             Explode(collision);
-            
-            // Destroy(gameObject);
         }
     }
 
@@ -48,7 +42,7 @@ public class Bullet : MonoBehaviour
             }
         }
 
-        // DEBUG
+
     }
 
     IEnumerator ExplosionEffect(float duration)
@@ -65,12 +59,6 @@ public class Bullet : MonoBehaviour
             yield return null;
         }
         Destroy(gameObject);
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        // Gizmos.DrawSphere(transform.position, explosionRadius);
     }
 
 }
