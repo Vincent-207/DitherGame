@@ -46,7 +46,8 @@ public class PlayerMovement : MonoBehaviour {
     //Sliding
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
-
+    public bool isWalking;
+    float walkingThreshold = 1f;
 
     // Updated input
     [SerializeField]
@@ -74,6 +75,7 @@ public class PlayerMovement : MonoBehaviour {
     private void Update() {
         MyInput();
         Look();
+        UpdateWalking();
     }
 
     /// <summary>
@@ -92,6 +94,15 @@ public class PlayerMovement : MonoBehaviour {
             StartCrouch();
         if (crouch.action.WasReleasedThisFrame())
             StopCrouch();
+    }
+
+    void UpdateWalking()
+    {
+        if(grounded && rb.linearVelocity.magnitude > walkingThreshold)
+        {
+            isWalking = true;
+        }
+        else isWalking = false;
     }
 
     private void StartCrouch() {

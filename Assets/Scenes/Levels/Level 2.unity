@@ -1695,7 +1695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4783163339795809268, guid: f3d22737477fb664eb29d5e1ff57ec44, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 24
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 4783163339795809268, guid: f3d22737477fb664eb29d5e1ff57ec44, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7120,6 +7120,7 @@ MonoBehaviour:
   slideForce: 400
   slideCounterMovement: 0.2
   jumpForce: 110
+  isWalking: 0
   move: {fileID: -4513820442964173110, guid: b6223a2862156b048b58580d292721c8, type: 3}
   jump: {fileID: -8674289114149160658, guid: b6223a2862156b048b58580d292721c8, type: 3}
   look: {fileID: 1280335728738555251, guid: b6223a2862156b048b58580d292721c8, type: 3}
@@ -7525,7 +7526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4783163339795809268, guid: f3d22737477fb664eb29d5e1ff57ec44, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 24
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 4783163339795809268, guid: f3d22737477fb664eb29d5e1ff57ec44, type: 3}
       propertyPath: m_LocalPosition.z
