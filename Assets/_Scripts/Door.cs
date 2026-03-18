@@ -16,8 +16,8 @@ public class Door : MonoBehaviour
     void LoadNextLevel()
     {
         Debug.Log("door has been entered correctly!");
-        SceneManager.LoadScene(levelToLoadName);
         levelTimer.Save();
+        SceneManager.LoadScene(levelToLoadName);
     }
     
 }

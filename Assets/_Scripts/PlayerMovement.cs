@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour {
     private float xRotation;
     private float sensitivity = 50f;
     private float sensMultiplier = 1f;
+    [SerializeField] Vector2 lookLimits;
     
     //Movement
     public float moveSpeed = 4500;
@@ -201,7 +202,7 @@ public class PlayerMovement : MonoBehaviour {
         
         //Rotate, and also make sure we dont over- or under-rotate.
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        xRotation = Mathf.Clamp(xRotation, lookLimits.x, lookLimits.y);
 
         //Perform the rotations
         playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
