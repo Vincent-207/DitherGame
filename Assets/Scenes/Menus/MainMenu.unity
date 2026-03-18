@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 115721254}
   - component: {fileID: 115721253}
   - component: {fileID: 115721252}
+  - component: {fileID: 115721255}
   m_Layer: 5
   m_Name: Play button
   m_TagString: Untagged
@@ -280,7 +281,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 115721253}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 115721255}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &115721253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,6 +332,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115721250}
   m_CullTransparentMesh: 1
+--- !u!114 &115721255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115721250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41eb027677fc5044bb3cb37ce15c6276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  SceneName: Level 0
 --- !u!1 &139580534
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,7 +697,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 665495241}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1704289308}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &665495241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -855,10 +893,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -922,6 +960,7 @@ GameObject:
   - component: {fileID: 797355567}
   - component: {fileID: 797355566}
   - component: {fileID: 797355565}
+  - component: {fileID: 797355568}
   m_Layer: 5
   m_Name: Level select button
   m_TagString: Untagged
@@ -992,7 +1031,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 797355566}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 797355568}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &797355566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1031,6 +1082,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 797355563}
   m_CullTransparentMesh: 1
+--- !u!114 &797355568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797355563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41eb027677fc5044bb3cb37ce15c6276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
+  SceneName: Level Select
 --- !u!1 &969988158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,7 +1600,7 @@ MonoBehaviour:
 
     Shaun - All 3d assets
 
-    Daniel
+    st4rl0aded_
     - music
 
 '
