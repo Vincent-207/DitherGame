@@ -5246,7 +5246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   bulletSpeed: 100
-  explosionForce: 300
+  explosionForce: 375
   explosionRadius: 10
   upForce: 5
   explosionTime: 0.1
